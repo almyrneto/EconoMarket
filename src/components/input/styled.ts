@@ -7,7 +7,8 @@ export const InputStyle = styled.input `
     height: 40px;
     border-radius: 10px;
     border: 1px solid ${colors.preto};
-    color: ${colors.branco};
+    color: ${colors.preto};
+    background: ${colors.branco}
     
 
     &::placeholder {

@@ -12,6 +12,9 @@ export const HomeBody = () => {
     const navigateLogin = () => {
         navigate('/login')
     }
+    const navigateSeller = () => {
+        navigate('/seller')
+    }
 
     return (
         <Container>
@@ -23,7 +26,7 @@ export const HomeBody = () => {
                     </ButtonIconBuyer>
                 </Container3>
                 <Container4>
-                    <ButtonIconSeller onClick={navigateLogin}>
+                    <ButtonIconSeller onClick={navigateSeller}>
                         <SellerIcon />
                         <Text>Vendedor</Text>
                     </ButtonIconSeller>

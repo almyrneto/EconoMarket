@@ -8,7 +8,12 @@ export const InputStyle = styled.input `
     border-radius: 10px;
     border: 1px solid ${colors.preto};
     color: ${colors.preto};
-    background: ${colors.branco}
+    background: ${colors.branco};
+    padding-left: 1.5rem;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 600px;
+    color: ${colors.preto};
     
 
     &::placeholder {
@@ -16,7 +21,7 @@ export const InputStyle = styled.input `
         font-weight: 400;
         font-family: Montserrat;
         color: #736868;
-        padding-left: 1.5rem;
+        maring-left: 1.5rem;
     }
 `
 
@@ -31,3 +36,24 @@ export const LabelStyles = styled.label `
     height: 21px;
 `
 
+export const EndInputStyle = styled.textarea `
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid ${colors.preto};
+    color: ${colors.preto};
+    padding-left: 1.5rem;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 600px;
+    color: ${colors.preto};
+    resize: none;
+
+    &::placeholder {
+        font-size: 13px;
+        font-weight: 400;
+        font-family: Montserrat;
+        color: #736868;
+        maring-left: 1.5rem;
+    }
+`

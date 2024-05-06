@@ -3,6 +3,8 @@ import { Home } from "../page/home"
 import { Login } from "../page/login"
 import { Register } from "../page/register"
 import { LoggedSeller } from "../page/loggedSeller"
+import { RegisterAnnouncement } from "../page/registerAnnouncement"
+import { PrivateRoute } from "./privateRoute"
 
 
 export const AppRouter = () => {
@@ -12,7 +14,8 @@ export const AppRouter = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/seller" element={<LoggedSeller />} />
+                <Route path="/seller" element={<PrivateRoute element={<LoggedSeller />} />} />
+                <Route path="/registerAnnouncement" element={<RegisterAnnouncement />} />
             </Routes>
         </Router>
     )

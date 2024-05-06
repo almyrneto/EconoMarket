@@ -2,16 +2,17 @@ import { ButtonStyle } from "./styled"
 
 type ButtonProps = {
     name: string,
-    // onClick?: () => void, 
+    onClick?: () => void, 
 }
 
 export const Button = ({
     name,
+    onClick,
 }: ButtonProps) => {
 
     return (
         <>
-            <ButtonStyle>
+            <ButtonStyle onClick={onClick}>
                 {name}
             </ButtonStyle>
         </>

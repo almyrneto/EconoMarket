@@ -30,3 +30,8 @@ export const ContainerCheckBox = styled.div `
     padding-left: 1rem;
     padding-top: 3rem;
 `
+
+export const InputCepNumber = styled.div `
+    display: flex;
+    gap: 0.5rem;
+`

@@ -10,7 +10,7 @@ export const LoggedSellerBody = () => {
     const navigate = useNavigate()
 
     const navigateNew = () => {
-        navigate('/login')
+        navigate('/registerAnnouncement')
     }
 
     return (

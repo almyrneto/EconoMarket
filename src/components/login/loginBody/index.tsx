@@ -2,14 +2,25 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../../button"
 import { Input } from "../../input"
 import { Container, ContainerButton, ContainerLogin, ContainerSenha, StyledLink, TextRegister } from "./styled"
+import Uselogin from "../../../page/userLoginSeller";
 
 
 export const LoginForm = () => {
+    const {
+        email,
+        setEmail,
+        password,
+        setPassword,
+        handleLogin,
+    } = Uselogin()
+
     const navigate = useNavigate()
+
 
     const navigateRegister = () => {
         navigate("/register")
     }
+
 
     return (
         <Container>
@@ -19,6 +30,8 @@ export const LoginForm = () => {
                     placeholder="E-mail"
                     type="email"
                     width="288px"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value)}}
                 />
             </ContainerLogin>
             <ContainerSenha>
@@ -27,11 +40,14 @@ export const LoginForm = () => {
                     placeholder="Senha"
                     type="password"
                     width="288px"
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value)}}
                 />
             </ContainerSenha>
             <ContainerButton>
                 <Button 
                     name="ENTRAR"
+                    onClick={handleLogin}
                 />
             </ContainerButton>
             <TextRegister>

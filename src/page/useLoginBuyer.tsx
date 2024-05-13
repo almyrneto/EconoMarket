@@ -29,7 +29,7 @@ export const UseLoginBuyer = () => {
             }
         } catch (error) {
             console.error('Erro ao fazer login:', error);
-            setError('Ocorreu um erro ao fazer login. tente novamente mais tarder')
+            setError('Email ou senha incorretos.')
         }
     };
 

@@ -40,3 +40,7 @@ export const ContainerIconInput = styled.div `
     left: 18.5rem;
     bottom: 1.8rem;
 `
+
+export const ContainerCarousel = styled.div `
+    padding-left: 3rem;
+`

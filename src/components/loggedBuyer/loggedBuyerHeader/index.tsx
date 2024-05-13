@@ -1,8 +1,9 @@
 import MarketLogged from "../../../assets/icons/marketLogged"
 import PinIcon from "../../../assets/icons/pin"
 import SearchIcon from "../../../assets/icons/search"
+import { Carousel } from "../../carousel"
 import { InputSearch } from "../../input"
-import { ContainerHeader, ContainerIcon, ContainerIconInput, ContainerInput, ContainerInputLocation, ContainerTitle, Title } from "./styled"
+import { ContainerCarousel, ContainerHeader, ContainerIcon, ContainerIconInput, ContainerInput, ContainerInputLocation, ContainerTitle, Title } from "./styled"
 
 
 export const LoggerBuyerHeader = () => {
@@ -37,6 +38,9 @@ export const LoggerBuyerHeader = () => {
                     <PinIcon />
                 </ContainerIconInput>
             </ContainerInputLocation>
+            <ContainerCarousel>
+                <Carousel />
+            </ContainerCarousel>
         </>
     )
 }

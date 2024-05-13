@@ -13,8 +13,6 @@ export const UseRegister = () => {
     const [cep, setCep] = useState("")
     const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
-    // const [image, setImage] = useState("")
-    // const [confirmPassword, setConfirmPassword] = useState("")
 
     const register = async () => {
 
@@ -27,8 +25,6 @@ export const UseRegister = () => {
             cep,
             phone,
             password,
-            // image,
-            // confirmPassword,
         )
 
         if (result?.message) {
@@ -75,9 +71,5 @@ export const UseRegister = () => {
         password,
         setPassword,
         register,
-        // image,
-        // setImage,
-        // confirmPassword,
-        // setConfirmPassword,
     }
 }

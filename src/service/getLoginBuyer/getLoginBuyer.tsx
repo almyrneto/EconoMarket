@@ -1,4 +1,5 @@
-import { apiService } from "../config/apiService"
+import { apiService } from "../config/apiService";
+
 
 export interface LoginCredentials {
     email: string;
@@ -10,45 +11,43 @@ export interface LoginResponse {
     name?: string;
 }
 
-export interface SellerDetails {
+export interface BuyerDetails {
     name: string;
     email: string;
+    phone: string;
     street: string;
     neighborhood: string;
     city: string;
-    phone: string;
     password: string;
     cep: string;
     image: string;
     role: string;
+    cpf: string;
 }
 
-
-export const loginSeller = async (credentials: LoginCredentials): Promise<LoginResponse> => {
+export const loginBuyer = async (credentials: LoginCredentials): Promise<LoginResponse> => {
 
     try {
-        const response = await apiService.post("/auth", credentials);
-        console.log("Response from loginSeller:", response.data);
+        const response = await apiService.post("/auth", credentials)
+        console.log("Response from loginBuyer:", response.data);
         return {
             token: response.data.token,
-            name: response.data.name
+            name: response.data.name,
         }
     } catch (error) {
         throw new Error("Erro ao fazer o login")
     }
 }
 
-
-export const getSellerDetails = async (token: string): Promise<SellerDetails> => {
+export const getBuyerDetails = async (token: string): Promise<BuyerDetails> => {
     try {
-        const response = await apiService.get("/sellers/info/me", {
+        const response = await apiService.get("/users/info/me", {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
         });
         return response.data;
-
     } catch (error) {
-        throw new Error("Erro ao obter os detalhes do vendedor")
+        throw new Error("Erro ao buscar os dados do comprador")
     }
 }

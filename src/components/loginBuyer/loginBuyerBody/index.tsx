@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../../button"
 import { Input } from "../../input"
 import { Container, ContainerButton, ContainerLogin, ContainerSenha, StyledLink, TextRegister } from "./styled"
-import Uselogin from "../../../page/userLoginSeller";
+import { UseLoginBuyer } from "../../../page/useLoginBuyer";
 
 
-export const LoginForm = () => {
+export const LoginBuyerForm = () => {
     const {
         email,
         setEmail,
@@ -13,13 +13,13 @@ export const LoginForm = () => {
         setPassword,
         handleLogin,
         error,
-    } = Uselogin()
+    } = UseLoginBuyer()
 
     const navigate = useNavigate()
 
 
     const navigateRegister = () => {
-        navigate("/register")
+        navigate("/registerBuyer")
     }
 
     return (

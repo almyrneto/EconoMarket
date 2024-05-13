@@ -1,5 +1,7 @@
+import { UseRegisterBuyer } from "../../../page/userRegisterBuyer";
 import { Button } from "../../button";
 import { CepInput, EndInput, Input } from "../../input";
+import { MaskedInput } from "../../maskedInput";
 import {
   ContainerButton,
   ContainerInput,
@@ -7,52 +9,57 @@ import {
   InputCepNumber,
   Text,
 } from "./styled";
-import { UseRegister } from "../../../page/useRegister";
-import { MaskedInput } from "../../maskedInput";
 
-export const RegisterForm = () => {
+export const RegisterBuyerForm = () => {
   const {
     name,
     setName,
     email,
     setEmail,
-    street,
-    setStreet,
-    neighborhood,
-    setNeighborhood,
-    city,
-    setCity,
-    cep,
-    setCep,
-    phone,
-    setPhone,
     password,
     setPassword,
-    register,
-  } = UseRegister();
+    street,
+    setStreet,
+    city,
+    setCity,
+    neighborhood,
+    setNeighborhood,
+    cep,
+    setCep,
+    cpf,
+    setCpf,
+    phone,
+    setPhone,
+    registerBuyer,
+  } = UseRegisterBuyer();
 
   return (
     <>
       <ContainerInput>
         <Input
-          label="Qual o nome da sua empresa??"
+          label="Como você gostaria de ser chamado?"
           type="text"
-          placeholder="Ex: Loja do Fulano de tal"
-          width="320px"
           value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
+          placeholder="Ex: Fulano de tal"
+          width="320px"
         />
       </ContainerInput>
+
       <ContainerInput>
         <MaskedInput
-          label="CNPJ (digite apenas numeros)"
-          placeholder="EX: 00.000.000/0000-00"
-          mask=" 99.999.999/9999-99"
+          placeholder=""
+          mask="999.999.999-99"
           type="text"
-          width="320px"
+          width="300px"
           maxLength={14}
+          label="CPF (digite apenas números)"
+          value={cpf}
+          onChange={(e) => {
+            setCpf(e.target.value);
+          }}
         />
       </ContainerInput>
       <ContainerInput>
@@ -69,12 +76,12 @@ export const RegisterForm = () => {
       </ContainerInput>
       <ContainerInput>
         <MaskedInput
-          label="Telefone"
-          type="text"
-          placeholder="Ex: (99) 999999999"
+          placeholder=""
           mask="(99) 99999-9999"
-          maxLength={11}
-          width="320px"
+          type="text"
+          width="300px"
+          maxLength={15}
+          label="Telefone"
           value={phone}
           onChange={(e) => {
             setPhone(e.target.value);
@@ -84,7 +91,7 @@ export const RegisterForm = () => {
       <InputCepNumber>
         <ContainerInput>
           <CepInput
-            label="Cep"
+            label="CEP"
             placeholder="99999999"
             type="text"
             width="320px"
@@ -98,7 +105,7 @@ export const RegisterForm = () => {
       <ContainerInput>
         <EndInput
           label="Endereço"
-          placeholder="Rua fulano de tal"
+          placeholder="Rua Fulano de Tal"
           value={street}
           onChange={(e) => {
             setStreet(e.target.value);
@@ -113,7 +120,7 @@ export const RegisterForm = () => {
           onChange={(e) => {
             setCity(e.target.value);
           }}
-          placeholder="Ex: Fulano de tal"
+          placeholder="Ex: Fulano de Tal"
           width="320px"
         />
       </ContainerInput>
@@ -125,11 +132,10 @@ export const RegisterForm = () => {
           onChange={(e) => {
             setNeighborhood(e.target.value);
           }}
-          placeholder="Ex: Fulano de tal"
+          placeholder="Ex: Fulano de Tal"
           width="320px"
         />
       </ContainerInput>
-
       <ContainerInput>
         <Input
           label="Senha"
@@ -142,10 +148,10 @@ export const RegisterForm = () => {
           }}
         />
         <ContainerText>
-          <Text>Use letras, numeros e simbolos</Text>
+          <Text>Use letras, números e símbolos</Text>
         </ContainerText>
         <ContainerButton>
-          <Button name="CADASTRE-SE" onClick={register} />
+          <Button name="CADASTRE-SE" onClick={registerBuyer} />
         </ContainerButton>
       </ContainerInput>
     </>

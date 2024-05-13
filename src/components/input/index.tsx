@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { colors } from "../../theme"
-import { EndInputStyle, InputStyle, LabelStyles } from "./styled"
+import { EndInputStyle, InputSearchStyle, InputStyle, LabelStyles } from "./styled"
 
 
 type InputProps = {
@@ -21,6 +21,12 @@ type TextInputProps = {
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement> | undefined
     isFocused?: boolean 
     label: string
+}
+
+type InputSearchProps = {
+    placeholder: string
+    value?: string
+    width: string
 }
 
 export const Input = ({
@@ -113,6 +119,25 @@ export const ImageInput = () => {
     return (
         <>
         
+        </>
+    )
+}
+
+export const InputSearch = (
+    {
+        placeholder,
+        value,
+        width,
+    }: InputSearchProps
+) => {
+
+    return (
+        <>
+            <InputSearchStyle 
+                placeholder={placeholder}
+                value={value}
+                width={width}
+            />
         </>
     )
 }

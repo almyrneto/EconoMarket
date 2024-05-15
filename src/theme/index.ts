@@ -7,4 +7,5 @@ export const colors = {
     verde: '#26AE1A',
     cinza: '#736868',
     cinza2: '#ECECEC',
+    vermelho: '#F50404',
 }

@@ -33,22 +33,12 @@ export const CadastroAnuncioHeader = () => {
     }
   };
 
-  const takePhoto = async () => {
-    try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
-      setStream(mediaStream);
-    } catch (error) {
-      console.error("Erro ao acessar a câmera:", error);
-    }
-  };
-
   const chooseFromGallery = async () => {
     try {
       const fileInput = document.createElement("input");
       fileInput.type = "file";
       fileInput.accept = "image/*";
+      fileInput.capture = "environment";
       fileInput.addEventListener("change", (event) => {
         if (event.target instanceof HTMLInputElement && event.target.files) {
           const file = event.target.files[0];
@@ -61,31 +51,6 @@ export const CadastroAnuncioHeader = () => {
     } catch (error) {
       console.error("Erro ao acessar a galeria:", error);
     }
-  };
-
-  const capturePhoto = () => {
-    if (stream) {
-      const video = document.createElement("video");
-      video.srcObject = stream;
-
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      }
-
-      const photo = canvas.toDataURL("image/jpeg");
-      setPhotos([...photos, photo]);
-      setSelectedPhotos(photos.length + 1);
-
-      stream.getTracks().forEach((track) => track.stop());
-      video.srcObject = null;
-      video.remove();
-      setStream(null);
-    }
-    closeModal();
   };
 
   return (
@@ -106,7 +71,7 @@ export const CadastroAnuncioHeader = () => {
           <ModalContent>
             <Title>Escolher uma opção</Title>
             <ButtonContainer>
-              <Button onClick={takePhoto}>
+              <Button onClick={chooseFromGallery}>
                 <CameraIcon />
                 Tirar foto
               </Button>
@@ -119,24 +84,6 @@ export const CadastroAnuncioHeader = () => {
           </ModalContent>
         </ModalBackground>
       )}
-      {stream && (
-        <div style={{ display: "none" }}>
-          <video
-            ref={(video) => {
-              if (video) video.srcObject = stream;
-            }}
-            autoPlay
-            playsInline
-          ></video>
-        </div>
-      )}
-      <button
-        onClick={capturePhoto}
-        style={{ display: "none" }}
-        id="captureBtn"
-      >
-        Capture
-      </button>
     </>
   );
 };

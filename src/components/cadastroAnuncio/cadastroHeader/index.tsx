@@ -19,6 +19,7 @@ export const CadastroAnuncioHeader = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPhotos, setSelectedPhotos] = useState(0);
   const [photos, setPhotos] = useState<string[]>([]);
+  const [stream, setStream] = useState<MediaStream | null>(null);
 
   const openModal = () => {
     setShowModal(true);
@@ -26,11 +27,44 @@ export const CadastroAnuncioHeader = () => {
 
   const closeModal = () => {
     setShowModal(false);
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      setStream(null);
+    }
   };
 
   const takePhoto = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+      });
+      setStream(mediaStream);
+    } catch (error) {
+      console.error("Erro ao acessar a câmera:", error);
+    }
+  };
+
+  const chooseFromGallery = async () => {
+    try {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+      fileInput.addEventListener("change", (event) => {
+        if (event.target instanceof HTMLInputElement && event.target.files) {
+          const file = event.target.files[0];
+          const photo = URL.createObjectURL(file);
+          setPhotos([...photos, photo]);
+          setSelectedPhotos(photos.length + 1);
+        }
+      });
+      fileInput.click();
+    } catch (error) {
+      console.error("Erro ao acessar a galeria:", error);
+    }
+  };
+
+  const capturePhoto = () => {
+    if (stream) {
       const video = document.createElement("video");
       video.srcObject = stream;
 
@@ -43,40 +77,15 @@ export const CadastroAnuncioHeader = () => {
       }
 
       const photo = canvas.toDataURL("image/jpeg");
-      addPhoto(photo);
+      setPhotos([...photos, photo]);
+      setSelectedPhotos(photos.length + 1);
+
       stream.getTracks().forEach((track) => track.stop());
       video.srcObject = null;
       video.remove();
-    } catch (error) {
-      console.error("Erro ao acessar a câmera:", error);
+      setStream(null);
     }
-  };
-
-  const chooseFromGallery = async () => {
-    try {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      console.log("Dispositivos de mídia disponíveis:", devices);
-      const fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.accept = "image/*";
-      fileInput.addEventListener("change", (event) => {
-        if (event.target instanceof HTMLInputElement && event.target.files) {
-          const file = event.target.files[0];
-          const photo = URL.createObjectURL(file);
-          addPhoto(photo);
-        }
-      });
-      fileInput.click();
-    } catch (error) {
-      console.error("Erro ao acessar a galeria:", error);
-    }
-  };
-
-  const addPhoto = (photo: string) => {
-    if (photos.length < 6) {
-      setPhotos([...photos, photo]);
-      setSelectedPhotos(photos.length + 1);
-    }
+    closeModal();
   };
 
   return (
@@ -110,6 +119,24 @@ export const CadastroAnuncioHeader = () => {
           </ModalContent>
         </ModalBackground>
       )}
+      {stream && (
+        <div style={{ display: "none" }}>
+          <video
+            ref={(video) => {
+              if (video) video.srcObject = stream;
+            }}
+            autoPlay
+            playsInline
+          ></video>
+        </div>
+      )}
+      <button
+        onClick={capturePhoto}
+        style={{ display: "none" }}
+        id="captureBtn"
+      >
+        Capture
+      </button>
     </>
   );
 };

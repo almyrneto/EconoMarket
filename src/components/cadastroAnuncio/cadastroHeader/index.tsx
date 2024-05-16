@@ -33,19 +33,20 @@ export const CadastroAnuncioHeader = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       const video = document.createElement("video");
       video.srcObject = stream;
-      video.play();
 
       const canvas = document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        ctx.drawImage(video, 0, 0);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       }
 
       const photo = canvas.toDataURL("image/jpeg");
       addPhoto(photo);
       stream.getTracks().forEach((track) => track.stop());
+      video.srcObject = null;
+      video.remove();
     } catch (error) {
       console.error("Erro ao acessar a câmera:", error);
     }
